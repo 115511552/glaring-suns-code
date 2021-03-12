@@ -1,7 +1,8 @@
 # Glaring Suns Code
 Code for the prototype design of the Glaring Suns project.
 
-Originally wrriten in March 2021
+Originally writen in March 2021.
+
 Designed for Arduino Uno
 
 ## Requirements
