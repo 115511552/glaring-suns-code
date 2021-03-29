@@ -11,11 +11,15 @@ class Button {
       Unactivated = false,
     };
 
+    static constexpr auto DEBOUNCE_MAX = 100;
   private:
     const unsigned int _port;
     const bool _reversed;
 
     State _last_state = State::Unactivated;
+    State _last_stable_state = State::Unactivated;
+
+    int _debounce = 0;
 
   public:
     Button(int port, bool reversed);
