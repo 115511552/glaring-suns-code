@@ -22,44 +22,50 @@ namespace Global {
   auto lux_sensor = new VemlSensor();
   auto main_motor = new Motor(2, 3, 7);
 
-  auto on_btn = new Button(12);
-  auto off_btn = new Button(11);
+  auto on_btn = new Button(12, true);
+  auto off_btn = new Button(11, true);
+
+  constexpr bool use_lux = false;
 }
 
 void setup() {
   Serial.begin(9600);
   Serial.println("~~~~");
 
-  Global::lux_sensor->setup();
+  if (Global::use_lux) {
+    Global::lux_sensor->setup();
+  }
+
   Global::main_motor->setup();
 
   Serial.println("setup");
 }
 
 void loop() {
-
-  if (!Global::on_btn && !Global::off_btn) {
-    /* if no buttons are active, use the automatic mode */
-
-    if (Global::lux_sensor->is_safe()) {
-      if (Global::lux_sensor->should_activate()) {
-
-        auto state = Global::lux_sensor->get_state();
-
-        /* below -> downwards. might need to fix this at some point */
-        auto new_direction = static_cast<Motor::Direction>(state);
-        Global::main_motor->begin_move_with_direction(new_direction);
+  if (Global::use_lux) {
+    if (!Global::on_btn && !Global::off_btn) {
+      /* if no buttons are active, use the automatic mode */
+  
+      if (Global::lux_sensor->is_safe()) {
+        if (Global::lux_sensor->should_activate()) {
+  
+          auto state = Global::lux_sensor->get_state();
+  
+          /* below -> downwards. might need to fix this at some point */
+          auto new_direction = static_cast<Motor::Direction>(state);
+          Global::main_motor->begin_move_with_direction(new_direction);
+        }
       }
     }
   }
 
   /* buttons should be never on and off but whatever */
-  if (Global::on_btn->state_changed() && Global::on_btn && !Global::off_btn) {
-    Global::main_motor->begin_move_with_direction(Motor::Direction::Upwards);
+  if (Global::on_btn->state_changed() && *Global::on_btn) {
+      Global::main_motor->begin_move_with_direction(Motor::Direction::Upwards);      
   }
 
-  if (Global::off_btn->state_changed() && !Global::on_btn && Global::off_btn) {
-    Global::main_motor->begin_move_with_direction(Motor::Direction::Downwards);
+  if (Global::off_btn->state_changed() && *Global::off_btn) {
+      Global::main_motor->begin_move_with_direction(Motor::Direction::Downwards);
   }
 
   Global::main_motor->on_loop();
