@@ -13,13 +13,15 @@ class Motor {
     };
 
     enum Max_Speed : unsigned int {
-      Forwards = 170,
+      Forwards = 160,
       Backwards = 20
     };
 
     static constexpr long Max_Pos = 2000;
 
   private:
+    const unsigned int _motor_port;
+
     bool _active = false;
     Direction _current_direction = Direction::Downwards;
 
