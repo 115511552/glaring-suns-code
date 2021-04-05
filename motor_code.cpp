@@ -39,8 +39,6 @@ void Motor::begin_move_with_direction(Motor::Direction n_direction) {
 
   auto motor_speed = static_cast<bool>(this->_current_direction) ? Motor::Max_Speed::Forwards : Motor::Max_Speed::Backwards;
 
-  Serial.println(motor_speed);
-
   this->_motor_393.write(motor_speed);
   this->_active = true;
 }
