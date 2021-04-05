@@ -11,7 +11,7 @@ class VemlSensor {
       BelowThreshold = false,
     };
 
-    static constexpr float Threshold = 100.0f;
+    static constexpr float Threshold = 300.0f;
 
   private:
     Adafruit_VEML7700 _sensor = Adafruit_VEML7700();
@@ -28,7 +28,8 @@ class VemlSensor {
     /** checks threshold and determines if action should be taken based on if threshold has changed since last read */
     bool should_activate();
 
-    const State get_state();
+    float get_lux();
+    State get_state();
 };
 
 #endif

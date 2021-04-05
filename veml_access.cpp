@@ -2,9 +2,7 @@
 
 bool VemlSensor::setup() {
   while (!this->_sensor.begin()) {
-    if (this->_improper_init == 0) {
-      Serial.println("Veml has failed to initialize");
-    } else if (this->_improper_init == 5) {
+    if (this->_improper_init == 5) {
       return false;
     }
     this->_improper_init++;
@@ -22,7 +20,7 @@ bool VemlSensor::setup() {
 }
 
 bool VemlSensor::is_safe() {
-  return (this->_sensor.readLux() <= 989560448.00);
+  return (this->get_lux() <= 989560448.00);
 }
 
 bool VemlSensor::should_activate() {
@@ -35,6 +33,10 @@ bool VemlSensor::should_activate() {
   return false;
 }
 
-const VemlSensor::State VemlSensor::get_state() {
-  return static_cast<State>(this->_sensor.readLux() >= VemlSensor::Threshold);
+float VemlSensor::get_lux() {
+  return this->_sensor.readLux();
+}
+
+VemlSensor::State VemlSensor::get_state() {
+  return static_cast<State>(this->get_lux() >= VemlSensor::Threshold);
 }
