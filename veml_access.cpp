@@ -1,7 +1,14 @@
 #include "veml_access.hpp"
 
-void VemlSensor::setup() {
+bool VemlSensor::setup() {
   while (!this->_sensor.begin()) {
+    if (this->_improper_init == 0) {
+      Serial.println("Veml has failed to initialize");
+    } else if (this->_improper_init == 5) {
+      return false;
+    }
+    this->_improper_init++;
+    
     delay(10);
   }
 
@@ -10,10 +17,12 @@ void VemlSensor::setup() {
 
   this->_sensor.powerSaveEnable(true);
   this->_sensor.setPowerSaveMode(VEML7700_POWERSAVE_MODE4);
+
+  return true;
 }
 
 bool VemlSensor::is_safe() {
-  return (this->_sensor.readLux() >= 989560448.00);
+  return (this->_sensor.readLux() <= 989560448.00);
 }
 
 bool VemlSensor::should_activate() {

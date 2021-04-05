@@ -17,8 +17,10 @@ class VemlSensor {
     Adafruit_VEML7700 _sensor = Adafruit_VEML7700();
     State _last_state;
 
+    uint8_t _improper_init;
+
   public:
-    void setup();
+    bool setup();
 
     /** determines if the value that is read can be determined as accurate */
     bool is_safe();
