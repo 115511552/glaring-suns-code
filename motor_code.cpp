@@ -43,6 +43,10 @@ void Motor::begin_move_with_direction(Motor::Direction n_direction) {
   this->_active = true;
 }
 
+bool Motor::is_active() const {
+  return this->_active;
+}
+
 void Motor::quick_stop() {
   this->_motor_393.write(90);
   this->_active = false;

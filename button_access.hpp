@@ -11,7 +11,7 @@ class Button {
       Unactivated = false,
     };
 
-    static constexpr auto DEBOUNCE_MAX = 100;
+    static constexpr auto DEBOUNCE_MAX = 2;
   private:
     const unsigned int _port;
     const bool _reversed;
@@ -28,7 +28,7 @@ class Button {
     bool state_changed();
     State get_state() const;
 
-    explicit operator bool() const {
+    inline explicit operator bool() const {
         return static_cast<Button::State>(this->get_state());
     }
 };

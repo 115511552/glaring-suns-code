@@ -36,6 +36,12 @@ class Motor {
 
     void begin_move_with_direction(Direction);
     void quick_stop();
+    
+    bool is_active() const;
+
+    inline explicit operator bool() const {
+        return this->is_active();
+    }
 };
 
 #endif

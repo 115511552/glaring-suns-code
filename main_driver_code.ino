@@ -83,5 +83,9 @@ void loop() {
       Global::main_motor.begin_move_with_direction(Motor::Direction::Downwards);
   }
 
-  Global::main_motor.on_loop();
+  if (Global::main_motor) {
+    Global::main_motor.on_loop();
+  } else {
+    delay(100);
+  }
 }
