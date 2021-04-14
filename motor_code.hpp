@@ -12,24 +12,24 @@ class Motor {
       Downwards = false,
     };
 
-    enum Max_Speed : unsigned int {
-      Forwards = 160,
+    enum Max_Speed : int {
+      Forwards = 170,
       Backwards = 20
     };
 
     static constexpr long Max_Pos = 2000;
 
   private:
-    const unsigned int _motor_port;
+    const uint8_t _motor_port;
 
     bool _active = false;
     Direction _current_direction = Direction::Downwards;
 
-    Servo _motor_393;
-    Encoder _motor_393_enc;
+    const Servo _motor_393;
+    const Encoder _motor_393_enc;
 
   public:
-    Motor(int, int, int);
+    Motor(uint8_t, uint8_t, uint8_t);
 
     void setup();
     void on_loop();

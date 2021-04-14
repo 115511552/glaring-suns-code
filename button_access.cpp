@@ -1,10 +1,13 @@
 #include "button_access.hpp"
 
-Button::Button(int port, bool reverse) : _port(port), _reversed(reverse) {
+Button::Button(uint8_t port, bool reverse) : _port(port), _reversed(reverse) {
   pinMode(this->_port, INPUT);
+
+  // "detect" the state the button currently starts with
+  this->state_changed();
 }
 
-Button::Button(int port) : Button(port, false) { }
+Button::Button(uint8_t port) : Button(port, false) { }
 
 bool Button::state_changed() {
   auto current_state = this->get_state();

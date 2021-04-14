@@ -2,7 +2,7 @@
 
 bool VemlSensor::setup() {
   while (!this->_sensor.begin()) {
-    if (this->_improper_init == 5) {
+    if (this->_improper_init >= 5) {
       return false;
     }
     this->_improper_init++;

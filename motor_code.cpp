@@ -1,6 +1,6 @@
 #include "motor_code.hpp"
 
-Motor::Motor(int enc_port_1, int enc_port_2, int motor_port) :
+Motor::Motor(uint8_t enc_port_1, uint8_t enc_port_2, uint8_t motor_port) :
   _motor_393_enc(Encoder(enc_port_1, enc_port_2)),
   _motor_port(motor_port) { }
 
@@ -17,7 +17,7 @@ void Motor::on_loop() {
   long newPos = this->_motor_393_enc.read();
 
   if (abs(newPos) >= Motor::Max_Pos) {
-    this->_motor_393.write(90);
+    this->_motor_393.write(0);
     this->_active = false;
   }
 }

@@ -14,7 +14,7 @@ class VemlSensor {
     static constexpr float Threshold = 300.0f;
 
   private:
-    Adafruit_VEML7700 _sensor = Adafruit_VEML7700();
+    const Adafruit_VEML7700 _sensor = Adafruit_VEML7700();
     State _last_state;
 
     uint8_t _improper_init;

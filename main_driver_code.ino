@@ -38,7 +38,9 @@ void setup() {
   if (Global::use_lux) {
     if (!Global::lux_sensor.setup()) {
       Global::use_lux = false;
-      Serial.println("Veml has failed to initialize");
+      if (Global::serial_output) {
+        Serial.println("Veml has failed to initialize");
+      }
     }
   }
 
@@ -76,10 +78,12 @@ void loop() {
 
   /* buttons should be never on and off but whatever */
   if (Global::on_btn.state_changed() && Global::on_btn) {
+      if (Global::serial_output) { Serial.println("btn on"); }
       Global::main_motor.begin_move_with_direction(Motor::Direction::Upwards);      
   }
 
   if (Global::off_btn.state_changed() && Global::off_btn) {
+      if (Global::serial_output) { Serial.println("btn off"); }
       Global::main_motor.begin_move_with_direction(Motor::Direction::Downwards);
   }
 
