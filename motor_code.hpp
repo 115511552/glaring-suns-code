@@ -13,11 +13,11 @@ class Motor {
     };
 
     enum Max_Speed : int {
-      Forwards = 170,
+      Forwards = 160,
       Backwards = 20
     };
 
-    static constexpr long Max_Pos = 2000;
+    static constexpr long Max_Pos = 1000;
 
   private:
     const uint8_t _motor_port;
