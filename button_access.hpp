@@ -11,7 +11,7 @@ class Button {
       Unactivated = false,
     };
 
-    static constexpr uint8_t DEBOUNCE_MAX = 6;
+    static constexpr uint8_t DEBOUNCE_MAX = 2;
   private:
     const uint8_t _port;
     const bool _reversed;

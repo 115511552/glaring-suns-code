@@ -4,7 +4,10 @@ Button::Button(uint8_t port, bool reverse) : _port(port), _reversed(reverse) {
   pinMode(this->_port, INPUT);
 
   // "detect" the state the button currently starts with
-  this->state_changed();
+  auto current_state = this->get_state();
+
+  this->_last_state = current_state;
+  this->_last_stable_state = current_state;
 }
 
 Button::Button(uint8_t port) : Button(port, false) { }
@@ -19,6 +22,7 @@ bool Button::state_changed() {
 
   if (current_state != this->_last_stable_state && this->_debounce >= Button::DEBOUNCE_MAX) {
     this->_last_stable_state = current_state;  
+    this->_debounce = 0;
     return true;
   } else {
     this->_debounce++;
