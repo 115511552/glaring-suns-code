@@ -6,7 +6,7 @@
 
 class Button {
   public:
-    enum State : bool {
+    enum class State : bool {
       Activated = true,
       Unactivated = false,
     };
@@ -29,7 +29,7 @@ class Button {
     State get_state() const;
 
     inline explicit operator bool() const {
-        return static_cast<Button::State>(this->get_state());
+        return static_cast<bool>(this->get_state());
     }
 };
 

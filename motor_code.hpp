@@ -7,14 +7,14 @@
 
 class Motor {
   public:
-    enum Direction : bool {
+    enum class Direction : bool {
       Upwards = true,
       Downwards = false,
     };
 
-    enum Max_Speed : int {
-      Forwards = 160,
-      Backwards = 20
+    enum class Max_Speed : int16_t {
+      Forwards = 120,
+      Backwards = 60
     };
 
     static constexpr long Max_Pos = 1000;

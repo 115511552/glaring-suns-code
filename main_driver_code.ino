@@ -62,7 +62,7 @@ void loop() {
 
           if (Global::serial_output) {
             Serial.print("State change: ");
-            Serial.print(state);
+            Serial.print(static_cast<bool>(state) ? "Above" : "Below");
             Serial.print(" <read at ");
             Serial.print(Global::lux_sensor.get_lux());
             Serial.println("f>");

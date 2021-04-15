@@ -6,7 +6,7 @@
 
 class VemlSensor {
   public:
-    enum State : bool {
+    enum class State : bool {
       AboveThreshold = true,
       BelowThreshold = false,
     };
