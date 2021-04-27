@@ -25,7 +25,7 @@ namespace Global {
   Button on_btn(12, true);
   Button off_btn(11, true);
 
-  constexpr bool serial_output = true;
+  constexpr bool serial_output = false;
   bool use_lux = true;
 }
 
@@ -90,6 +90,6 @@ void loop() {
   if (Global::main_motor) {
     Global::main_motor.on_loop();
   } else {
-    delay(100);
+    delay(50);
   }
 }

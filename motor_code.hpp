@@ -17,7 +17,7 @@ class Motor {
       Backwards = 60
     };
 
-    static constexpr long Max_Pos = 1000;
+    static constexpr long Max_Pos = 1500;
 
   private:
     const uint8_t _motor_port;
